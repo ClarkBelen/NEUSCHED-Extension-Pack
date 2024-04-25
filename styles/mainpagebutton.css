@@ -1,0 +1,43 @@
+button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    transition: background-color 0.3s ease;
+    vertical-align: middle;
+}
+
+button.manualInput {
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #008000;
+    color: #008000;
+}
+
+button.manualInput:hover {
+    background: #008000;
+    color: hsl(210, 40%, 98%);
+}
+
+button.autoGenerate {
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #008000;
+    color: #008000;
+}
+
+button.autoGenerate:hover {
+    background: #008000;
+    color: hsl(210, 40%, 98%);
+}
+
+button.back{
+    width: 40%;
+    border: 1px solid rgb(2, 107, 156);
+    color: rgb(0, 76, 112);
+}
+button.back:hover {   
+    background: rgb(2, 107, 156);
+    color: hsl(210, 40%, 98%);
+}

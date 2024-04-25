@@ -1,0 +1,79 @@
+button {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    transition: background-color 0.3s ease;
+    vertical-align: middle;
+}
+
+button.showSchedule {
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #008000;
+    color: #008000;
+}
+
+button.showSchedule:hover {
+    background: #008000;
+    color: hsl(210, 40%, 98%);
+}
+
+button.generate {
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #008000;
+    background: #008000;
+    color: white;
+}
+
+button.generate:hover {
+    background: #004a00;
+    color: hsl(210, 40%, 98%);
+}
+
+button.import {
+    width: 100%;
+    border: 1px solid #0077ff;
+    color: #0077ff;
+}
+
+button.import:hover {
+    background: #0077ff;
+    color: hsl(210, 40%, 98%);
+}
+
+button.delete {
+    margin-top: 10px;
+    width: 50%;
+    border: 1px solid #f49c64;
+    color: #f49c64;
+}
+
+button.delete:hover {
+    background: #f49c64;
+    color: hsl(210, 40%, 98%);
+}
+
+button.getStarted{
+    width: 50%;
+    margin-bottom: 15px;
+    border: 1px solid #0091bd;
+    background: #0091bd;
+    color: white;
+}
+button.getStarted:hover {   
+    background: #024c9c;
+    color: hsl(210, 40%, 98%);
+}
+
+button.back{
+    width: 40%;
+    border: 1px solid rgb(2, 107, 156);
+    color: rgb(2, 107, 156);
+}
+button.back:hover {   
+    background: rgb(2, 107, 156);
+    color: hsl(210, 40%, 98%);
+}

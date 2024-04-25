@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/datepicker.css" />
+    <link rel="stylesheet" href="/styles/button.css" />
+
+    <script type="application/javascript" src="/js/panel.js" defer></script>
+    <script type="application/javascript" src="/js/automateUtil.js" defer></script>
+
+    <title>NEUSCHED</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Heading -->
+      <div class="container">
+        <!-- subject to change due to current state of automate -->
+        <a href="https://neu.edu.ph/main/" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/New_Era_University.png" class="logo" alt="Logo" /></a>
+        <h1>NEUSCHED</h1>
+      </div>
+
+      <br />
+      <div class="container">
+        <h3>
+          <!-- subject to change due to current state of automate -->
+          Log in first to
+          <a href="https://neu.edu.ph/main/" target="_blank" rel="noopener noreferrer">
+            NEU School Automate
+        </a>
+        </h3>
+      </div>
+
+      <!-- Datepicker -->
+    <div class="date-picker">
+        <div class="date-section">
+          <label for="startDate">Start Date</label>
+          <input type="date" id="startDate" style="margin-bottom: 0.6rem" required/>
+        </div>
+        <div class="date-section">
+          <label for="endDate">End Date</label>
+          <input type="date" id="endDate" required />
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div>
+        <div style="display: flex; gap: 0.4rem; margin-bottom: 0.4rem">
+          <button id="showScheduleButton" class="button showSchedule">
+            Show Class Schedule
+          </button>
+          <button id="generateCSVButton" class="button generate">
+            Generate CSV
+          </button>
+        </div>
+        <center>
+          <button id="importCSV" class="button import">
+            Import to Google Calendar
+          </button>
+          <button id="deleteEvents" class="button delete">
+           Delete All Events
+          </button>
+        </center>
+        <br /><br />
+        <div class="container">
+          <button class="button back" id="getStartedButton">Back to Main Menu</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
