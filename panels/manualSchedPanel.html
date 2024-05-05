@@ -49,20 +49,24 @@ Click here</a>
 
       <!-- Action Buttons -->
       <div>
-        <div style="display: flex; gap: 0.4rem; margin-bottom: 0.4rem">
+        
           <button id="generateCSVButton" class="button generate">
             Generate CSV
           </button>
-        </div>
+        
+       
         <button id="importCSV" class="button import">
           Import to Google Calendar
         </button>
-        <center>
-        <button id="deleteEvents" class="button delete">
-          Delete All Events
-         </button>
-        </center>
-        <br /><br />
+        <div style="display: flex; gap: 0.4rem; margin-bottom: 0.4rem">
+          <button id="deleteSelected" class="button delete">
+            Delete Selected Events
+          </button>
+          <button id="deleteAll" class="button delete">
+            Delete All Events
+          </button>
+        </div>
+      <br /><br />
         <div class="container">
           <button class="button back" id="getStartedButton">Back to Main Menu</button>
         </div>

@@ -51,20 +51,29 @@
       <!-- Action Buttons -->
       <div>
         <div style="display: flex; gap: 0.4rem; margin-bottom: 0.4rem">
-          <button id="showScheduleButton" class="button showSchedule">
+          <button id="showScheduleButton" class="button showEdit">
             Show Class Schedule
           </button>
+          <button id="editScheduleButton" class="button showEdit">
+            Edit Class Schedule
+          </button>
+         
+        </div>
+        <center>
           <button id="generateCSVButton" class="button generate">
             Generate CSV
           </button>
-        </div>
-        <center>
           <button id="importCSV" class="button import">
             Import to Google Calendar
           </button>
-          <button id="deleteEvents" class="button delete">
-           Delete All Events
-          </button>
+          <div style="display: flex; gap: 0.4rem; margin-bottom: 0.4rem">
+            <button id="deleteSelected" class="button delete">
+              Delete Selected Events
+            </button>
+            <button id="deleteAll" class="button delete">
+              Delete All Events
+            </button>
+          </div>
         </center>
         <br /><br />
         <div class="container">

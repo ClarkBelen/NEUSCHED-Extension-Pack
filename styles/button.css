@@ -8,14 +8,14 @@ button {
     vertical-align: middle;
 }
 
-button.showSchedule {
+button.showEdit {
     width: 100%;
     margin-bottom: 15px;
     border: 1px solid #008000;
     color: #008000;
 }
 
-button.showSchedule:hover {
+button.showEdit:hover {
     background: #008000;
     color: hsl(210, 40%, 98%);
 }

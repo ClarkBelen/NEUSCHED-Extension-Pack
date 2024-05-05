@@ -92,7 +92,7 @@ function generateCSVFile(selectedStartDate, selectedEndDate) {
      // Assuming 'data' is an array of objects containing course details
     data.forEach((course) => {
       let subject = course.subjectName;
-      let description = course.subjectCode + " | " + course.subjectName + " " + course.description; // Use the subject name from the HTML structure
+      let description = course.subjectCode + " | " + course.subjectName + "  " + course.description; // Use the subject name from the HTML structure
       let daySchedule = course.day; // Use the schedule from the HTML structure
       let dayStart = course.startTime;
       let dayEnd = course.endTime;
@@ -132,40 +132,103 @@ function generateCSVFile(selectedStartDate, selectedEndDate) {
   
   }
   
-  function deleteAllEventsFromCSV() {
+  function deleteSelectedEvents(startDate, endDate) {
+    
+    if (!startDate || !endDate) {
+      alert("Please select a valid start and end date.");
+      return;
+    } else if (startDate > endDate) {
+      alert(
+        "Invalid duration. Please ensure selected start date is earlier than end date."
+      );
+      return;
+    }
+
     const elements = document.querySelectorAll('[jsname="Fa5oWb"]');
   
     var classEventsElements = [];
   
+    // Ensure startDate and endDate are Date objects and set their time to the start of the day
+    const start = new Date(startDate);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(endDate);
+    end.setHours(0, 0, 0, 0);
+  
     elements.forEach((element) => {
       console.log(element.innerText);
       if (element.innerText.includes("📅") || element.innerText.includes("NEUSCHED")) {
-        classEventsElements.push(element);
+        const ariaLabel = element.querySelector('[role="button"]').getAttribute('aria-label');
+        const dateMatch = ariaLabel.match(/(\w+ \d{1,2}, \d{4})/);
+        if (dateMatch) {
+          const eventDate = new Date(dateMatch[1]);
+          // Set the time to the start of the day for fair comparison
+          eventDate.setHours(0, 0, 0, 0);
+          // Compare just the date parts
+          if (eventDate >= start && eventDate <= end) {
+            classEventsElements.push(element);
+          }
+        }
       }
     });
   
     if (classEventsElements.length === 0) {
-      alert("All class events have been deleted.");
-      return; // Exit the function if there are no more elements to delete
+      alert("All class events from " + startDate + " to " + endDate + " have been deleted.");
+      return;
     }
   
     const element = classEventsElements[0];
   
     element.click();
   
-    // Wait for the modal to appear
     setTimeout(() => {
-      // Click the element with aria-label="Delete event"
       const deleteElement = document.querySelector('[aria-label="Delete event"]');
       if (deleteElement) {
         deleteElement.click();
       }
-      // Simulate the escape key press to close the modal
       const escapeEvent = new KeyboardEvent("keydown", { key: "Escape" });
       document.dispatchEvent(escapeEvent);
-      // Call deleteElements function recursively after a delay
-      setTimeout(deleteAllEventsFromCSV, 10);
-    }, 10); // Wait for 1 second before deleting the next element
+
+      setTimeout(deleteSelectedEvents, 0.01 * 1000, startDate, endDate);
+    }, 0.01 * 1000);
+}
+
+function deleteAllEventsFromCSV() {
+  const elements = document.querySelectorAll('[jsname="Fa5oWb"]');
+
+  var classEventsElements = [];
+
+  elements.forEach((element) => {
+    console.log(element.innerText);
+    if (element.innerText.includes("📅") || element.innerText.includes("NEUSCHED")) {
+      classEventsElements.push(element);
+    }
+  });
+
+  if (classEventsElements.length === 0) {
+    alert("All class events have been deleted.");
+    return; // Exit the function if there are no more elements to delete
   }
+
+  const element = classEventsElements[0];
+
+  element.click();
+
+  // Wait for the modal to appear
+  setTimeout(() => {
+    // Click the element with aria-label="Delete event"
+    const deleteElement = document.querySelector('[aria-label="Delete event"]');
+    if (deleteElement) {
+      deleteElement.click();
+    }
+    // Simulate the escape key press to close the modal
+    const escapeEvent = new KeyboardEvent("keydown", { key: "Escape" });
+    document.dispatchEvent(escapeEvent);
+
+    // Call deleteElements function recursively after a delay
+    setTimeout(deleteAllEventsFromCSV, 0.01 * 1000);
+  }, 0.01 * 1000); // Wait for 0.5 second before deleting the next element
+}
+
+
 
 

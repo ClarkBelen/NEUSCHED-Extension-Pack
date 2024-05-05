@@ -195,40 +195,190 @@ function generateCSVFile(selectedStartDate, selectedEndDate) {
     csv.download = "neuschedule_" + selectedStartDate + "-to-" + selectedEndDate + "_automate.csv";
     csv.click();
   }
+
+  function parseToManualInput(){
+        // Select the table with the border attribute set to "1"
+        let root = document.querySelector('table[border="1"]');
   
-  function deleteAllEventsFromCSV() {
+        // Get all the rows except the header row
+        let rows = Array.from(root.querySelectorAll("tr")).slice(1);
+      
+        let data = rows.map(function (row) {
+          let subjectCode = row.querySelector("td:nth-child(1)").innerText.trim();
+          let subjectName = row.querySelector("td:nth-child(2)").innerText.trim();
+          let scheduleText = row.querySelector("td:nth-child(3)").innerText.trim();
+          let sectionRoomText = row.querySelector("td:nth-child(4)").innerText.trim();
+          let lecLabUnits = row.querySelector("td:nth-child(5)").innerText.trim();
+          let totalUnits = row.querySelector("td:nth-child(6)").innerText.trim();
+      
+          // Split schedules and section rooms by newline
+          let uniqueSchedules = scheduleText.split("\n").map((s) => s.trim());
+          let uniqueSectionRooms = sectionRoomText.split("\n").map((s) => s.trim());
+      
+          // Ensure both arrays have the same length by filling with empty strings if necessary
+          while (uniqueSchedules.length < uniqueSectionRooms.length) {
+            uniqueSchedules.push(uniqueSchedules[0]);
+          }
+          while (uniqueSectionRooms.length < uniqueSchedules.length) {
+            uniqueSectionRooms.push(uniqueSectionRooms[0]);
+          }
+      
+          // Map each schedule and section room to an object
+          let schedulesAndRooms = uniqueSchedules.map((schedule, index) => {
+            let sectionRoom = uniqueSectionRooms[index];
+      
+            let specialCases = [
+              "MT",
+              "MW",
+              "MTH",
+              "MF",
+              "MSAT",
+              "MSUN",
+              "TW",
+              "TTH",
+              "TF",
+              "TSAT",
+              "TSUN",
+              "WTH",
+              "WF",
+              "WSAT",
+              "WSU",
+              "THF",
+              "ThSAT",
+              "ThSUN",
+              "FSAT",
+              "FSUN",
+              "SATSUN",
+            ];
+      
+            // Special cases handling
+            specialCases.forEach((dayCombo) => {
+              let pattern = new RegExp("^" + dayCombo + "\\s+(.+)");
+              let match = schedule.match(pattern);
+              if (match) {
+                let day1 = dayCombo.charAt(0);
+                let day2 = dayCombo.slice(1);
+                schedule = `${day1} ${match[1]},${day2} ${match[1]}`;
+              }
+            });
+      
+            return {
+              subjectCode,
+              subjectName,
+              schedule,
+              sectionRoom,
+              lecLabUnits,
+              totalUnits,
+            };
+          });
+      
+          // Return the array of objects
+          return schedulesAndRooms;
+        });
+      
+        // Flatten the array of arrays to a single array
+        data = data.flat();
+      
+        // Now 'data' contains an array of objects with the course details
+        console.log(data);
+        // After parsing the data, send it back to the popup script
+        chrome.runtime.sendMessage({ parsedData: data });
+  }
+  
+  function deleteSelectedEvents(startDate, endDate) {
+    
+    if (!startDate || !endDate) {
+      alert("Please select a valid start and end date.");
+      return;
+    } else if (startDate > endDate) {
+      alert(
+        "Invalid duration. Please ensure selected start date is earlier than end date."
+      );
+      return;
+    }
+
     const elements = document.querySelectorAll('[jsname="Fa5oWb"]');
   
     var classEventsElements = [];
   
+    // Ensure startDate and endDate are Date objects and set their time to the start of the day
+    const start = new Date(startDate);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(endDate);
+    end.setHours(0, 0, 0, 0);
+  
     elements.forEach((element) => {
       console.log(element.innerText);
       if (element.innerText.includes("📅") || element.innerText.includes("NEUSCHED")) {
-        classEventsElements.push(element);
+        const ariaLabel = element.querySelector('[role="button"]').getAttribute('aria-label');
+        const dateMatch = ariaLabel.match(/(\w+ \d{1,2}, \d{4})/);
+        if (dateMatch) {
+          const eventDate = new Date(dateMatch[1]);
+          // Set the time to the start of the day for fair comparison
+          eventDate.setHours(0, 0, 0, 0);
+          // Compare just the date parts
+          if (eventDate >= start && eventDate <= end) {
+            classEventsElements.push(element);
+          }
+        }
       }
     });
   
     if (classEventsElements.length === 0) {
-      alert("All class events have been deleted.");
-      return; // Exit the function if there are no more elements to delete
+      alert("All class events from " + startDate + " to " + endDate + " have been deleted.");
+      return;
     }
   
     const element = classEventsElements[0];
   
     element.click();
   
-    // Wait for the modal to appear
     setTimeout(() => {
-      // Click the element with aria-label="Delete event"
       const deleteElement = document.querySelector('[aria-label="Delete event"]');
       if (deleteElement) {
         deleteElement.click();
       }
-      // Simulate the escape key press to close the modal
       const escapeEvent = new KeyboardEvent("keydown", { key: "Escape" });
       document.dispatchEvent(escapeEvent);
-      // Call deleteElements function recursively after a delay
-      setTimeout(deleteAllEventsFromCSV, 10);
-    }, 10); // Wait for 1 second before deleting the next element
+
+      setTimeout(deleteSelectedEvents, 0.01 * 1000, startDate, endDate);
+    }, 0.01 * 1000);
+}
+
+function deleteAllEventsFromCSV() {
+  const elements = document.querySelectorAll('[jsname="Fa5oWb"]');
+
+  var classEventsElements = [];
+
+  elements.forEach((element) => {
+    console.log(element.innerText);
+    if (element.innerText.includes("📅") || element.innerText.includes("NEUSCHED")) {
+      classEventsElements.push(element);
+    }
+  });
+
+  if (classEventsElements.length === 0) {
+    alert("All class events have been deleted.");
+    return; // Exit the function if there are no more elements to delete
   }
+
+  const element = classEventsElements[0];
+
+  element.click();
+
+  // Wait for the modal to appear
+  setTimeout(() => {
+    // Click the element with aria-label="Delete event"
+    const deleteElement = document.querySelector('[aria-label="Delete event"]');
+    if (deleteElement) {
+      deleteElement.click();
+    }
+    // Simulate the escape key press to close the modal
+    const escapeEvent = new KeyboardEvent("keydown", { key: "Escape" });
+    document.dispatchEvent(escapeEvent);
+
+    // Call deleteElements function recursively after a delay
+    setTimeout(deleteAllEventsFromCSV, 0.01 * 1000);
+  }, 0.01 * 1000); // Wait for 0.5 second before deleting the next element
+}
 
