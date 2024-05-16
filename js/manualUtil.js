@@ -158,9 +158,11 @@ function generateCSVFile(selectedStartDate, selectedEndDate) {
       console.log(element.innerText);
       if (element.innerText.includes("📅") || element.innerText.includes("NEUSCHED")) {
         const ariaLabel = element.querySelector('[role="button"]').getAttribute('aria-label');
-        const dateMatch = ariaLabel.match(/(\w+ \d{1,2}, \d{4})/);
+        let dateCal = ariaLabel.split(",").map((s) => s.trim());
+        const dateMatch = dateCal[4];
+        console.log(dateMatch);
         if (dateMatch) {
-          const eventDate = new Date(dateMatch[1]);
+          const eventDate = new Date(dateMatch);
           // Set the time to the start of the day for fair comparison
           eventDate.setHours(0, 0, 0, 0);
           // Compare just the date parts
