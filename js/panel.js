@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       automateSched.addEventListener("click", function () {
           chrome.tabs.create({
-          url: "http://192.168.95.4/PARENTS_STUDENTS/parents_student_index.htm" //subject to change due to current state of automate
+          url: "http://student.neu.edu.ph" //subject to change due to current state of automate
       });
 
       const automatePage = "/panels/neuAutomatePanel.html";
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (showSchedule) {
     showSchedule.addEventListener("click", function () {
       chrome.tabs.update({
-        url: "http://192.168.95.4/PARENTS_STUDENTS/enrollment/schedule.jsp", //subject to change due to current state of automate
+        url: "http://student.neu.edu.ph/PARENTS_STUDENTS/enrollment/schedule.jsp", //subject to change due to current state of automate
       });
     });
   }
