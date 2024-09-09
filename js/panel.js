@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  //Links that may update from time to time (from NEU)
+  var automateLink = "https://student.neu.edu.ph/PARENTS_STUDENTS/parents_student_index.htm";
+  var scheduleLink = "http://student.neu.edu.ph/PARENTS_STUDENTS/enrollment/schedule.jsp";
+
   if (document.getElementById("getStartedButton")) {
     const getStartedButton = document.getElementById("getStartedButton");
 
@@ -22,14 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  
+
 
   if (document.getElementById("automateSched")) {
-      const automateSched = document.getElementById("automateSched");
+    const automateSched = document.getElementById("automateSched");
 
-      automateSched.addEventListener("click", function () {
-          chrome.tabs.create({
-          url: "http://student.neu.edu.ph" //subject to change due to current state of automate
+    automateSched.addEventListener("click", function () {
+      chrome.tabs.create({
+        url: automateLink
       });
 
       const automatePage = "/panels/neuAutomatePanel.html";
@@ -43,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     manualInputButton.addEventListener("click", function () {
       chrome.tabs.create({
-        url: "https://froilandelfinjr.github.io/manual_input/", 
+        url: "https://froilandelfinjr.github.io/manual_input/",
       });
 
       const manualInput = "/panels/manualSchedPanel.html";
@@ -58,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (showSchedule) {
     showSchedule.addEventListener("click", function () {
       chrome.tabs.update({
-        url: "http://student.neu.edu.ph/PARENTS_STUDENTS/enrollment/schedule.jsp", //subject to change due to current state of automate
+        url: scheduleLink,
       });
     });
   }
@@ -75,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (editSchedule) {
     editSchedule.addEventListener("click", function () {
-      
+
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
           target: { tabId: tabs[0].id },
@@ -94,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const manualInput = "/panels/manualSchedPanel.html";
-    
+
         chrome.sidePanel.setOptions({ path: manualInput });
       }, 1000); // Adjust timeout as needed
     });
@@ -130,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (document.getElementById("deleteSelected")){
+  if (document.getElementById("deleteSelected")) {
     const deleteEvents = document.getElementById("deleteSelected");
 
     deleteEvents.addEventListener("click", function () {
@@ -140,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const tab = tabs[0];
-    
+
         if (tab.url.includes("https://calendar.google.com/calendar/u/" && "/r/agenda") === false) {
           alert("- Please go to your Google calendar schedules.\n- Then select STARTING and ENDING date of the events to be deleted.");
 
@@ -152,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const userResponse = confirm(
             "Are you sure that all events in the schedule view are from the CSV file processed by NEUSCHED?"
           );
-    
+
           if (userResponse) {
             chrome.scripting.executeScript({
               target: { tabId: tabs[0].id },
@@ -165,14 +169,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (document.getElementById("deleteAll")){
+  if (document.getElementById("deleteAll")) {
     const deleteEvents = document.getElementById("deleteAll");
 
     deleteEvents.addEventListener("click", function () {
 
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const tab = tabs[0];
-    
+
         if (tab.url.includes("https://calendar.google.com/calendar/u/" && "/r/agenda") === false) {
           alert("Please go to your Google calendar schedules https://calendar.google.com/calendar/");
 
@@ -184,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const userResponse = confirm(
             "Are you sure that all events in the schedule view are from the CSV file processed by NEUSCHED?"
           );
-    
+
           if (userResponse) {
             chrome.scripting.executeScript({
               target: { tabId: tabs[0].id },

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "NEUSCHED - A Schedule Management Tool for New Era University Students",
+  "name": "NEUSCHED",
   "version": "1.1",
-  "description": "Helps NEU Students to put their class schedule from NEU Automate to Google Calendar.",
+  "description": "A Schedule Management Tool for New Era University Students that helps them put their class schedule from NEU Automate to Google Calendar.",
   "permissions": [
     "activeTab",
     "scripting",
