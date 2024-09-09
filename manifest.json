@@ -1,36 +1,36 @@
 {
-    "manifest_version": 3,
-    "name": "NEUSCHED",
-    "version": "1.1",
-    "description": "Helps NEU Students to put their class schedule from NEU Automate to Google Calendar.",
-    "permissions": [
-      "activeTab",
-      "scripting",
-      "sidePanel"
-    ],
-    "host_permissions": [
-      "<all_urls>"
-    ],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "side_panel": {
-      "default_path": "panels/welcomePanel.html"
-    },
-    "action": {
-      "default_icon": "assets/New_Era_University.png",
-      "default_title": "Click to organize schedule"
-    },
-    "content_scripts": [
-      {
-        "matches": [
-          "<all_urls>"
-        ],
-        "js": [
-          "js/automateUtil.js",
-          "js/manualUtil.js",
-          "js/panel.js"
-        ]
-      }
-    ]
-  }
+  "manifest_version": 3,
+  "name": "NEUSCHED - A Schedule Management Tool for New Era University Students",
+  "version": "1.1",
+  "description": "Helps NEU Students to put their class schedule from NEU Automate to Google Calendar.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "panels/welcomePanel.html"
+  },
+  "action": {
+    "default_icon": "assets/New_Era_University.png",
+    "default_title": "Click to organize schedule"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/automateUtil.js",
+        "js/manualUtil.js",
+        "js/panel.js"
+      ]
+    }
+  ]
+}
