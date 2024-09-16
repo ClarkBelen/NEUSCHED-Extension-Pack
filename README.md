@@ -4,7 +4,7 @@ NEUSCHED Extension is a panel type-web extension that will serve as a tool for N
 With the power of Google Calendar features such as reminders and notifications together with the NEUSCHED Extension tool, the students will be able to manage their schedules from start to end, keeping them informed and organized at all times. This integration of technology streamlines their academic experience, empowering them to focus on their studies and personal growth without the hassle of managing multiple and recurring class events or missing crucial agendas. With this integration, students can optimize their time management and achieve their academic goals with ease.
 
 ## TABLE OF CONTENTS
-- [Overview of the Extension](https://github.com/ClarkBelen/NEUSCHED-Extension-Pack/blob/main/README.md#neusched-extension)
+- [Overview of the Extension](https://github.com/ClarkBelen/NEUSCHED-Extension-Pack/blob/main/README.md#neusched-web-extension)
 - [Installation Process of the Extension](https://github.com/ClarkBelen/NEUSCHED-Extension-Pack/blob/main/README.md#chrome-web-store-installation-updated-easy-steps)
 - [User's Manual](https://github.com/ClarkBelen/NEUSCHED-Extension-Pack/blob/main/README.md#users-manual) 
   - [Main Menu](https://github.com/ClarkBelen/NEUSCHED-Extension-Pack/blob/main/README.md#main-menu-panel)
