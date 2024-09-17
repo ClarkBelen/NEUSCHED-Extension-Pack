@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Links that may update from time to time (from NEU)
   var automateLink = "https://student.neu.edu.ph/PARENTS_STUDENTS/parents_student_index.htm";
-  var scheduleLink = "http://student.neu.edu.ph/PARENTS_STUDENTS/enrollment/schedule.jsp";
+  var scheduleLink = "https://student.neu.edu.ph/PARENTS_STUDENTS/enrollment/schedule.jsp";
 
   if (document.getElementById("getStartedButton")) {
     const getStartedButton = document.getElementById("getStartedButton");
