@@ -1,5 +1,5 @@
 # NEUSCHED Web Extension
-NEUSCHED Extension is a panel type-web extension that will serve as a tool for NEU Students to seamlessly organize their schedules from their automate or manual inputs. It allows them to convert their class schedule into a compatible format that can be easily imported to Google Calendar. 
+[NEUSCHED](https://chromewebstore.google.com/detail/neusched/kmjdaaafbdogjedppojodhloocmgiima) is a panel type-web extension that will serve as a tool for NEU Students to seamlessly organize their schedules from their automate or manual inputs. It allows them to convert their class schedule into a compatible format that can be easily imported to Google Calendar. 
 
 With the power of Google Calendar features such as reminders and notifications together with the NEUSCHED Extension tool, the students will be able to manage their schedules from start to end, keeping them informed and organized at all times. This integration of technology streamlines their academic experience, empowering them to focus on their studies and personal growth without the hassle of managing multiple and recurring class events or missing crucial agendas. With this integration, students can optimize their time management and achieve their academic goals with ease.
 
