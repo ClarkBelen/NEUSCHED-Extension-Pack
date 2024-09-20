@@ -21,7 +21,9 @@ With the power of Google Calendar features such as reminders and notifications t
    ![image](https://github.com/user-attachments/assets/184dbe35-c850-424f-80a6-929e92a5a2fa)
    ![image](https://github.com/user-attachments/assets/b611466b-9e77-4851-a23c-3d9cf0fe3039)
 
-4. Click `Add to Chrome` and the installation is done. You can finally utilize the web extension tool!
+4. Click `Add to Chrome` and the installation is done. You can finally utilize the NEUSCHED web extension as your scheduling tool.
+  
+6. Pin the extension from extension bar for easy access. Enjoy!
    
 ## Manual Steps for installing the extension to chrome browser
 1. Go to https://github.com/ClarkBelen/NEUSCHED-Extension-Pack
